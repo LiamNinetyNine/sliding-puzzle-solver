@@ -1,11 +1,9 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Puzzle {
-	
-	//private DFS dfs;
-	
-	public Puzzle() {
-		//dfs = new DFS();
-	}
 
 	public static void main(String[] args) {
 		// define given states S1 and S2
@@ -14,14 +12,14 @@ public class Puzzle {
 
 		DFS dfs = new DFS();
 		
-		//dfs.test("abc;def;gh_");
-		
-		//execute algorithm
-		dfs.DFS(S1);
-		//dfs.DFS(S2);
-		
-		// !! answers to part a,b,c,d,e,f go here !!
-		
+		//Part a, b, c, d
+		ArrayList<String> R_S1 = new ArrayList<String>(dfs.DFS(S1));
+		writeToFile("PartA", R_S1);
+		System.out.println("Part b = " + R_S1.size()); //answer to part b, |R(S1)|
+
+		ArrayList<String> R_S2 = new ArrayList<String>(dfs.DFS(S2));
+		writeToFile("PartC", R_S2);
+		System.out.println("Part d = " + R_S2.size()); //answer to part c, |R(S2)|
 	}
 	
 	public String moveUp(String state, int row_index, int col_index) {
@@ -229,4 +227,26 @@ public class Puzzle {
 		}
 		return null;
 	}
+
+	public static void writeToFile(String file_name, ArrayList<String> R_values) {
+	    try {
+	      File myObj = new File(file_name + ".txt");
+	      if (myObj.createNewFile()) {
+	        System.out.println("File created: " + myObj.getName());
+	      } else {
+	        System.out.println("File already exists.");
+	      }
+	      FileWriter myWriter = new FileWriter(file_name + ".txt");
+	      for(String value : R_values) {
+		      myWriter.write(value + "\n");
+	      }
+	      myWriter.close();
+	      System.out.println("Successfully wrote to the file.");
+	    } catch (IOException e) {
+	      System.out.println("An error occurred.");
+	      e.printStackTrace();
+	    }
+	  }
+
+	
 }

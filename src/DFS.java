@@ -11,10 +11,13 @@ public class DFS extends Puzzle {
 	Map<String, Boolean> moves;
 	String current_state;
 
-	public void DFS(String start_state) {
+	public ArrayList<String> DFS(String start_state) {
 		/* The purpose of this function is to take a
 		 * start state and, using depth-first-search, 
-		 * return every possible legal state */
+		 * return every possible legal state and
+		 * store each state in the ArrayList R_values */
+		
+		ArrayList<String> R_values = new ArrayList<String>();
 		
 		//stores the visited value of each puzzle state
 		visited_list = new HashMap<String, Boolean>();
@@ -29,11 +32,14 @@ public class DFS extends Puzzle {
 		while(!S.isEmpty()) {
 			//set the current state to the state at the top of the stack
 			current_state = S.pop().toString();
-			System.out.println("Finding the neighbours for " + current_state);
+			
+			//System.out.println("Finding the neighbours for " + current_state);
+			
 			//if the current state has not been visited
 			if (!visited_list.get(current_state)) {
 				//set the current state to visited
 				visited_list.put(current_state,true);
+				R_values.add(current_state);
 				//for each adjacent neighbour of the current_state...
 				for(String neighbour: getNeighbours(current_state)) {
 					//System.out.println("Neighbour = " + neighbour);
@@ -48,15 +54,7 @@ public class DFS extends Puzzle {
 				}
 			}
 		}
-		System.out.println("Search complete, writing result of R(S1) and R(S2) to file...");
-		System.out.println("The result for part c is :\n");
-		System.out.println(" ");
-		System.out.println("The result for part d is :\n");
-		System.out.println(" ");
-		System.out.println("The result for part e is :\n");
-		System.out.println(" ");
-		System.out.println("The result for part f is :\n");
-		System.out.println(" ");
+		return R_values;
 	}
 	
 	public void test(String state) {
@@ -100,18 +98,8 @@ public class DFS extends Puzzle {
 			
 			//remove the redundancy
 			row_index = row_index - 1;
-			
-			//debug
-			//System.out.println("Location of the blank " + row_index + " , " + col_index);
-			/* NO REAL USE FOR THIS */
-			
-			
-			
-			
-			
 			//here row 1,2,3 in the 8 puzzle is denoted as 0,1,2 since indexing with arrays starts at 0
-			
-			
+
 			//now define each possible legal rule for the current state
 			if(row_index != 0) {
 				moves.put("up", true); //legal rule #1, if the blank is not in the top row, then the blank can move up
