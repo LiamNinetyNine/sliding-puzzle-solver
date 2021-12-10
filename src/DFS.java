@@ -29,18 +29,21 @@ public class DFS extends Puzzle {
 		while(!S.isEmpty()) {
 			//set the current state to the state at the top of the stack
 			current_state = S.pop().toString();
+			System.out.println("Finding the neighbours for " + current_state);
 			//if the current state has not been visited
 			if (!visited_list.get(current_state)) {
 				//set the current state to visited
 				visited_list.put(current_state,true);
 				//for each adjacent neighbour of the current_state...
 				for(String neighbour: getNeighbours(current_state)) {
-					System.out.println("Neighbour = " + neighbour);
+					//System.out.println("Neighbour = " + neighbour);
 					if(neighbour != null) {
 						//... add it to the stack
 						S.push(neighbour.toString());
 						//make sure the state is set to unvisited
-						visited_list.put(neighbour, false);
+						if(!visited_list.containsKey(neighbour.toString())) {
+							visited_list.put(neighbour.toString(), false);
+						}
 					}
 				}
 			}
@@ -99,7 +102,7 @@ public class DFS extends Puzzle {
 			row_index = row_index - 1;
 			
 			//debug
-			System.out.println("Location of the blank " + row_index + " , " + col_index);
+			//System.out.println("Location of the blank " + row_index + " , " + col_index);
 			/* NO REAL USE FOR THIS */
 			
 			
@@ -129,22 +132,22 @@ public class DFS extends Puzzle {
 					switch(move) {
 					case "left":
 						String moved_left = moveLeft(state, row_index, col_index);
-						System.out.println("Left move has produced " + moved_left + " ....adding to neighbours...");
+						//System.out.println("Left move has produced " + moved_left + " ....adding to neighbours...");
 						neighbours.add(moved_left); //moves the blank left, creating a new neighbour
 						break;
 					case "up":
 						String moved_up = moveUp(state, row_index, col_index);
-						System.out.println("Up move has produced " + moved_up + " ....adding to neighbours...");
+						//System.out.println("Up move has produced " + moved_up + " ....adding to neighbours...");
 						neighbours.add(moved_up); //moves the blank up
 						break;
 					case "right":
 						String moved_right = moveRight(state, row_index, col_index);
-						System.out.println("Right move has produced " + moved_right + " ....adding to neighbours...");
+						//System.out.println("Right move has produced " + moved_right + " ....adding to neighbours...");
 						neighbours.add(moved_right); //moves the blank right
 						break;
 					case "down":
 						String moved_down = moveDown(state, row_index, col_index);
-						System.out.println("Down move has produced " + moved_down + " ....adding to neighbours...");
+						//System.out.println("Down move has produced " + moved_down + " ....adding to neighbours...");
 						neighbours.add(moved_down); //moves the blank down, adding an independent state to the neighbours arraylist
 						break;
 					default:
@@ -155,7 +158,7 @@ public class DFS extends Puzzle {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+		//System.out.println("Returning added neighbours for DFS");
 		//neighbours have been found, return them...
 		return neighbours.toArray(new String[0]);
 	}

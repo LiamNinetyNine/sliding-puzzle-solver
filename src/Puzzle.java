@@ -14,10 +14,10 @@ public class Puzzle {
 
 		DFS dfs = new DFS();
 		
-		dfs.test("abc;def;gh_");
+		//dfs.test("abc;def;gh_");
 		
 		//execute algorithm
-		//dfs.DFS(S1);
+		dfs.DFS(S1);
 		//dfs.DFS(S2);
 		
 		// !! answers to part a,b,c,d,e,f go here !!
@@ -31,9 +31,10 @@ public class Puzzle {
 		 * we swap the value in (n,m) with (n-1,m) 
 		 * row_index and col_index are the index of the blank tile
 		 * in the grid. State is a String formatted as is valid 
-		 * (e.g. abc;d_e;fgh) */
+		 * (e.g. abc;d_e;fgh) 
+		 * Returns null otherwise */
 		
-		System.out.println("Moving " + state + " Up.");
+		//System.out.println("Moving " + state + " Up.");
 		
 		//check that this is a legal move
 		if(row_index != 0) {
@@ -43,10 +44,8 @@ public class Puzzle {
 			//remove all semi-colons from the string to make it easier to manipulate (giving e.g. abcd_efgh)
 			state = state.replaceAll(";", ""); 
 			
-			/* we know that the blank is on row row_index and column col_index
-			 * so if we imagine the string without semicolons we would have abcd_efgh 
-			 * so blank is at index row_index + col_index */
-			
+
+			//find the index of the blank corresponding to the unformatted puzzle
 			int index_of_blank = 0;
 			
 			if(row_index == 0) {
@@ -84,9 +83,10 @@ public class Puzzle {
 		 * downwards. Given the location of the tile, such that
 		 * (n,m) is the location of the blank tile in the grid,
 		 * we swap the value in (n,m) with (n+1,m) row_index and col_index are the index of the blank tile
-		 * in the grid. */
+		 * in the grid. 
+		 * Returns null otherwise. */
 		
-		System.out.println("Moving " + state + " Down.");
+		//System.out.println("Moving " + state + " Down.");
 		
 		//check that this is a legal move
 		if(row_index != 2) {
@@ -96,9 +96,8 @@ public class Puzzle {
 			//remove all semi-colons from the string to make it easier to manipulate (giving e.g. abcd_efgh)
 			state = state.replaceAll(";", ""); 
 			
-			/* we know that the blank is on row row_index and column col_index
-			 * so if we imagine the string without semicolons we would have abcd_efgh 
-			 * so blank is at index row_index + col_index */
+
+			//find the index of the blank corresponding to the unformatted puzzle
 			int index_of_blank = 0;
 			
 			if(row_index == 0) {
@@ -135,9 +134,10 @@ public class Puzzle {
 		 * left. Given the location of the tile, such that
 		 * (n,m) is the location of the blank tile in the grid,
 		 * we swap the value in (n,m) with (n,m-1) row_index and col_index are the index of the blank tile
-		 * in the grid. */
+		 * in the grid. 
+		 * Returns null otherwise. */
 		
-		System.out.println("Moving " + state + " Left.");
+		//System.out.println("Moving " + state + " Left.");
 		
 		//check if this is a legal move or not
 		if(col_index != 0) {
@@ -147,9 +147,8 @@ public class Puzzle {
 			//remove all semi-colons from the string to make it easier to manipulate (giving e.g. abcd_efgh)
 			state = state.replaceAll(";", ""); 
 			
-			/* we know that the blank is on row row_index and column col_index
-			 * so if we imagine the string without semicolons we would have abcd_efgh 
-			 * so blank is at index (row_index + col_index) */
+
+			//find the index of the blank corresponding to the unformatted puzzle
 			int index_of_blank = 0;
 			
 			if(row_index == 0) {
@@ -186,9 +185,10 @@ public class Puzzle {
 		 * right. Given the location of the tile, such that
 		 * (n,m) is the location of the blank tile in the grid,
 		 * we swap the value in (n,m) with (n,m+1) row_index and col_index are the index of the blank tile
-		 * in the grid. */
+		 * in the grid. 
+		 * Returns null otherwise. */
 		
-		System.out.println("Moving " + state + " Right.");
+		//System.out.println("Moving " + state + " Right.");
 		
 		//check if this is a legal move or not
 		if(col_index != 2) {
@@ -198,9 +198,7 @@ public class Puzzle {
 			//remove all semi-colons from the string to make it easier to manipulate (giving e.g. abcd_efgh)
 			state = state.replaceAll(";", ""); 
 			
-			/* we know that the blank is on row row_index and column col_index
-			 * so if we imagine the string without semicolons we would have abcd_efgh 
-			 * so blank is at index row_index + col_index */
+			//find the index of the blank corresponding to the unformatted puzzle
 			int index_of_blank = 0;
 			
 			if(row_index == 0) {
