@@ -2,6 +2,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.*;
 
 public class Puzzle {
 
@@ -12,14 +16,20 @@ public class Puzzle {
 
 		DFS dfs = new DFS();
 		
-		//Part a, b, c, d
+		//Part a and b
 		ArrayList<String> R_S1 = new ArrayList<String>(dfs.DFS(S1));
 		writeToFile("PartA", R_S1);
 		System.out.println("Part b = " + R_S1.size()); //answer to part b, |R(S1)|
 
+		//part c and d
 		ArrayList<String> R_S2 = new ArrayList<String>(dfs.DFS(S2));
 		writeToFile("PartC", R_S2);
 		System.out.println("Part d = " + R_S2.size()); //answer to part c, |R(S2)|
+		
+		//part e and f; source of code: https://stackoverflow.com/questions/5283047/intersection-and-union-of-arraylists-in-java
+		ArrayList<String> intersection = new ArrayList<String>(R_S1.stream().filter(R_S2::contains).collect(Collectors.toList()));
+		writeToFile("PartE", intersection);
+		System.out.println("Part f = " + intersection.size());
 	}
 	
 	public String moveUp(String state, int row_index, int col_index) {
@@ -27,7 +37,7 @@ public class Puzzle {
 		 * upwards. Given the location of the tile, such that
 		 * (n,m) is the location of the blank tile in the grid,
 		 * we swap the value in (n,m) with (n-1,m) 
-		 * row_index and col_index are the index of the blank tile
+		 * n = row_index and m = col_index are the index of the blank tile
 		 * in the grid. State is a String formatted as is valid 
 		 * (e.g. abc;d_e;fgh) 
 		 * Returns null otherwise */
@@ -248,5 +258,14 @@ public class Puzzle {
 	    }
 	  }
 
+	public static ArrayList<String> intersection(ArrayList<String> R_S1, ArrayList<String> R_S2) {
+		ArrayList<String> intersection = new ArrayList<String>();
+        for (String s : R_S1) {
+            if(R_S2.contains(s)) {
+                intersection.add(s);
+            }
+        }
+        return intersection;
+    }
 	
 }
